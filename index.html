@@ -1,1 +1,248 @@
 
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Elder Zach's 70th Birthday | Find Your Table</title>
+
+<style>
+
+:root {
+
+  --blue: #102f75;
+
+  --silver: #d9e0ed;
+
+}
+
+* { box-sizing: border-box; }
+
+body {
+
+  margin: 0;
+
+  min-height: 100vh;
+
+  font-family: Arial, sans-serif;
+
+  background: linear-gradient(145deg, #0b2053, #2454a4);
+
+  color: #172b50;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 22px;
+
+}
+
+main {
+
+  width: 100%;
+
+  max-width: 520px;
+
+  background: white;
+
+  border: 5px solid var(--silver);
+
+  border-radius: 22px;
+
+  padding: 28px 20px;
+
+  text-align: center;
+
+  box-shadow: 0 12px 35px #0004;
+
+}
+
+.crown { font-size: 42px; }
+
+h1 { color: var(--blue); margin: 8px 0; }
+
+.subtitle { color: #61708c; }
+
+label { display: block; text-align: left; margin: 22px 0 7px; font-weight: bold; }
+
+input {
+
+  width: 100%;
+
+  padding: 15px;
+
+  border: 2px solid #cbd5e5;
+
+  border-radius: 10px;
+
+  font-size: 17px;
+
+}
+
+button {
+
+  width: 100%;
+
+  padding: 15px;
+
+  margin-top: 12px;
+
+  background: var(--blue);
+
+  color: white;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+}
+
+#result { margin-top: 20px; }
+
+.table-card {
+
+  padding: 20px 10px;
+
+  border: 2px solid var(--silver);
+
+  border-radius: 14px;
+
+  background: #f4f7fc;
+
+}
+
+.table-number { font-size: 38px; color: var(--blue); font-weight: bold; }
+
+.table-name { font-size: 23px; font-weight: bold; margin-top: 8px; }
+
+.note { font-size: 13px; color: #66738b; margin-top: 22px; }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+  <div class="crown">♛</div>
+
+  <h1>Elder Zach Turns 70!</h1>
+
+  <p class="subtitle">A royal celebration of a remarkable life</p>
+
+  <h2>Find Your Table</h2>
+
+  <p>Welcome! Enter your name below to find your seat.</p>
+
+  <form id="searchForm">
+
+    <label for="guestName">Your name</label>
+
+    <input id="guestName" type="text" placeholder="Enter your name" autocomplete="name" required>
+
+    <button type="submit">Find My Table</button>
+
+  </form>
+
+  <div id="result" aria-live="polite"></div>
+
+  <p class="note">Elder Zach's 70th Birthday Celebration<br>With love, family and friends</p>
+
+</main>
+
+<script>
+
+const tables = [
+
+{number:2,name:"Inner Circle",guests:["Chioma Godwin","Desmond Iwelu","Ijeoma Ibekwe","Uche Ademuyiwa","Amanda Iloegbune","Fredrick Iloegbune","Stella Adiele","Ugonwanyi Adiele","Michael Adiele","Udoka Ohuonu"]},
+
+{number:3,name:"Padi 4 life",guests:["Annette DeBreo","Lilian Erondu","Charles Ogbonna","Vivien Erondu","Brian","Akunna Erondu","Eric Oduche","Miriam Mbah-Amanze","Obinna Amanze","Laura Ngwenya"]},
+
+{number:4,name:"Fine Wine",guests:["Uhuka","Charity Uhuka","Chinkere Chigbo","Silverline Chigbo","Wale Oladipo","Yewande Oladipo","Fred Erha","Janie Okemena Erha","Collins Onuoha","Bisola Onuoha"]},
+
+{number:5,name:"Pina Colada",guests:["Maurice Njoku","Ngozi Njoku","Constance Onwuama","Ben Onwuama","Sarah Roland","Edith Nwachukwu","Heomah Jerry","Jerry Onyemuru","Vivian jack","Jack"]},
+
+{number:6,name:"Firewood Jollof",guests:["Ade­wunmi Fajoju","Olumide Fajoju","Ayo Folorunsho","Adebimpe Folorunsho","Andrew Owunna","Ifeoluwa Alao-Owunna","Blessing Ndubuisi","Ndubuisi Nwosu","Judith Emah","Udeme Emah"]},
+
+{number:7,name:"Oga at the Top (Amangwu Nmama nu)",guests:["Johnson Ekea","Jessy Ekea","Nnenna Ekea","Iroha Ekea","Eme Ekea","Grace Ekea","Ukpai Ekea","Tochi","Oluchi Ekea","Okorie Ekea"]},
+
+{number:8,name:"Ubuntu United",guests:["Samson Jesi","Emma-Vanessa Kamin","Netsal Mhakayakora","Mkpoyo Inyang","Chris Dube","Jessica Gwaringa","John Gwaringa","Ben Chisanga","Vee Chisanga"]},
+
+{number:9,name:"Mzansi Movers",guests:["Paul Millin","Langa Millin","Andrew West","Rosemary West","Colin Woodford","Annelie Woodford","Charity Chikengezha","Fafi Chikengezha","Fari","Jack"]},
+
+{number:10,name:"Bablawo of Vibes",guests:["Tola Popoola","Demola Popoola","Moji Ogunniran","Wole Ogunniran","Mope Jegede","Kenny Jegede","Ahaoma Benson","Gold Benson","Iheanyi Obasi","Bawardi Amede"]},
+
+{number:11,name:"Owambe and Chill",guests:["Funmi Ogundiran","Abiola Oluikpe","Bolaji Aborisade","Taiwo Aborisade","Titilayo Mendie","Tayo Fakeye","Caroline Fakeye","Temitope Onatunde","Xyrus Mendoza","Uchechi Evurulobi"]},
+
+{number:12,name:"Party Jollof",guests:["Toyeen Dare-Aworinde","Florence Makinde","Dotun Makinde","Olufolake Ogundiran","Temi Ogundiran","Tola Afe","Sibongile Mtopo","Arnold Mtopo","Thembie Gibson","Stewart Gibson"]},
+
+{number:13,name:"Bed and Breakfast",guests:["Joy Quiacos","Mrs Joy Quiacos","Roy Urboda","Vicky Habimana","Mercy Kassanje","Robert Chikuza","Mejuleta Chikuza","Ruth Mhlanga","Vimbai Chengeta","Robert Mhlanga"]},
+
+{number:14,name:"Chop Life Committe",guests:["Gloria Osakuni","Chidinma Manuwa","Isaac Mavalla","Solomon Obot","Chinaza Emmanuel Amakwe","Ezinwanyi Lily Chinaza","Tobechi","Louis Peter","Christiana Peter","David Uchendu"]},
+
+{number:15,name:"1 2 Steppers",guests:["Emmanuel Uchendu","Ogechi Uchendu","Christine Uchendu","Jennifer Uchendu","Onyebuchi Agha","Onyinye Agha","Obiageli Uzomah","Chudy Uzomah","Uchechukwu","Ruth Uchechukwu"]},
+
+{number:16,name:"Clock It",guests:["Precious Roland","Chichi Roland","Timi Adewunmi","Temi Adewunmi","Tobi Adewunmi","Tawina Kassanje","Jed Uchendu","Jordan","Alex","Tobi"]},
+
+{number:17,name:"Encore",guests:["Chidunem Njoku","Obinna Njoku","Kelechi Njoku","Chantelle","Tanya"]},
+
+{number:18,name:"VIP Lounge",guests:["Kelechi Anucha","Ogechi Anucha","Nkasiobi Anucha","Isabelle Lea","Vesper Urboda","Xyana Mendoza","Ogadinma Okoko","Blessing Ogadinma Okoko"]},
+
+{number:19,name:"Too Much Juice Too Much Sauce",guests:["Emeka Nwaojigba","Yvonne Nwaojigba","Blessing Molomo","Anu Molomo","Ayo Adeshina","Funmi Adeshina","Maduka Ogbuonye","Ngozi Blessing Ogbuonye"]},
+
+{number:20,name:"Show Stoppers",guests:["Chihurumnanya Godwin","Nkechinyerem Orji","Eric Kwesi Agyare","Goodluck Chukwunenyem","Joy Amaefule-Mark","Laura Asaolu","Samuel Asaolu&Eliana","Chinedu Egbulefu","Blessing Nwaigwe","Joy Nwaigwe"]}
+
+];
+
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+
+  event.preventDefault();
+
+  const query = document.getElementById("guestName").value.trim().toLocaleLowerCase();
+
+  const matches = [];
+
+  tables.forEach(table => table.guests.forEach(guest => {
+
+    if (guest.toLocaleLowerCase() === query) matches.push({guest,table});
+
+  }));
+
+  const result = document.getElementById("result");
+
+  if (matches.length === 1) {
+
+    const match = matches[0];
+
+    result.innerHTML = '<div class="table-card"><p>Your table is</p><div class="table-number">Table ' + match.table.number + '</div><div class="table-name">' + match.table.name + '</div><p>Enjoy the celebration!</p></div>';
+
+  } else if (matches.length > 1) {
+
+    result.innerHTML = '<p>We found more than one guest with that name. Please enter your full name or ask a member of the event team for help.</p>';
+
+  } else {
+
+    result.innerHTML = '<p>We could not find that exact name. Please check the spelling or ask a member of the event team for help.</p>';
+
+  }
+
+});
+
+</script>
+
+</body>
+
+</html>
